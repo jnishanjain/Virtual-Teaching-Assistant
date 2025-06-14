@@ -1,9 +1,6 @@
 fastapi
-uvicorn
-openai
-pytesseract
-Pillow
+uvicorn[standard]
+openai>=1.0.0
 faiss-cpu
-sentence-transformers
-beautifulsoup4
-requests
+numpy
+pillow
