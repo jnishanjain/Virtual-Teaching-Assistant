@@ -1,16 +1,53 @@
-prompts:
-  - "Should I use gpt-4o-mini or gpt-3.5-turbo?"
-  - "What tokenizer is used in GA5?"
-  - "Can we assume token cost for both input and output?"
+# project-tds-virtual-ta-promptfoo.yaml
+version: "1"
 
+# ─── Define your API endpoint as a PromptFoo “provider” ───────────────────────
 providers:
-  - provider: openai
+  - name: virtual-ta
+    type: rest
     config:
-      url: "https://your-app-name.onrender.com/api/"
-      method: "POST"
+      # ← REPLACE this with your actual API URL:
+      url: "http://localhost:8000/api/"
+      method: post
       headers:
         Content-Type: application/json
-      body: |
-        {
-          "question": "{{prompt}}"
-        }
+      # Tell PF how to pass the prompt into your POST body
+      body:
+        question: "{{prompt}}"
+      # If you support images, you could add:
+      # body:
+      #   question: "{{prompt}}"
+      #   image: "{{imageBase64}}"
+
+# ─── List out the tests (student‐like questions + expected patterns) ─────────┐
+tests:
+  - name: cost‐calculation
+    prompt: "If 3500 tokens cost $0.50 per 1M tokens, how many cents is that?"
+    expected:
+      - type: match
+        # we expect the answer to contain "0.175" or "0.18" cents
+        value: "0.17"
+        partial: true
+
+  - name: module‐difficulty
+    prompt: "Which module in TDS is considered the hardest?"
+    expected:
+      - type: match
+        # we expect them to mention "ROE" or "Remote Online Exam"
+        value: "ROE"
+        partial: true
+
+  - name: citation‐check
+    prompt: "What is the purpose of the _Remote Online Exam_ in TDS?"
+    expected:
+      - type: match
+        value: "open-Internet"
+        partial: true
+      - type: match
+        value: "20%"
+        partial: true
+
+# ─── Optional global settings ────────────────────────────────────────────────
+settings:
+  # only show failures
+  logLevel: warn
