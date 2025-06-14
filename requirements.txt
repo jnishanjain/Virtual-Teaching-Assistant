@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+openai
+pytesseract
+Pillow
+faiss-cpu
+sentence-transformers
+beautifulsoup4
+requests

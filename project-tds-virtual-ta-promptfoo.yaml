@@ -1,0 +1,16 @@
+prompts:
+  - "Should I use gpt-4o-mini or gpt-3.5-turbo?"
+  - "What tokenizer is used in GA5?"
+  - "Can we assume token cost for both input and output?"
+
+providers:
+  - provider: openai
+    config:
+      url: "https://your-app-name.onrender.com/api/"
+      method: "POST"
+      headers:
+        Content-Type: application/json
+      body: |
+        {
+          "question": "{{prompt}}"
+        }
