@@ -89,7 +89,7 @@ def answer(req: QuestionRequest):
     # 3) Generate
     out = gen_pipe(
         prompt,
-        max_length=150,
+        max_length=256,
         do_sample=False,
     )
     answer_text = out[0]["generated_text"].strip()
