@@ -1,7 +1,8 @@
 fastapi
 uvicorn[standard]
-openai>=1.0.0
 faiss-cpu
 numpy
 pillow
-python-dotenv
+sentence-transformers
+transformers
+accelerate
