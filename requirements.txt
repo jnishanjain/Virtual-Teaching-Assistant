@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+faiss-cpu
+numpy
+pillow
+sentence-transformers
+transformers
+accelerate
